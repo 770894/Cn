@@ -1,506 +1,256 @@
-# Cn
-3)a(import socket
---------------------
-server=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+# STA
+check=True while check:
 
-server_address=('localhost',10000)
+a,b,c=map(int,input().split())
 
-server.bind(server_address)
+c1=((a>=1)) and ((a<=10))
 
-server.listen(1)
+c2=((b>=1)) and ((b<=10))
 
-connection, client_address=server.accept()
+c3=((c>=1)) and ((c<=10))
 
-print("Connection established with: ",client_address)
+if(not c1):
 
-data=connection.recv(1000)
+print("a is not in range") if(not c2):
 
-print("Received:",data)
+print("b is not in range") if(not c3):
 
-connection.sendall(data)
+print("c is not in range") check=(not c1) or (not c2) or (not c3)
 
-connection.close()
+if((a<(b+c)) and (b<(a+c)) and (c<(a+b))): if((a==b) and (b==c)):
 
-server.close()
+print("Eqilateral triangle") elif((a!=b) and (b!=c) and (c!=a)):
 
-client--------------------
+print("Scalene triangle") else:
 
-import socket
-
-client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-
-server_address=('localhost',10000)
-
-client.connect(server_address)
-
-print("Enter the message")
-
-message=input()
-
-print("Sending",message)
-
-client.sendall(message.encode())
-
-print("ORIGINAL: ",message)
-
-data=client.recv(1000).decode()
-
-print("ECHO: ",data)
-
-client.close()
-
-
-
-3)b).import socket
-
-server=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-
-server_address=('localhost',10000)
-
-server.bind(server_address)
-
-server.listen(1)
-
-print(“waiting for connection”)
-
-connection, client_address=server.accept()
-while message!="end":
-
-data=connection.recv(1000).decode()
-
-if data:
-
-print(data)
-
-message=input()
-
-connection.sendall(message.encode())
+print("Isosceles triangle")
 
 else:
 
-break
+print("Triangle cannot be formed")
 
-connection.close()
-
-server.close()
-
-Client:------------------
-
-import socket
-
-client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-
-server_address=('localhost',10000)
-
-client.connect(server_address)
-
-message=input()
-
-client.sendall(message.encode())
-
-while message!="end":
-
-data=client.recv(1000).decode()
-
-if data:
-
-print(data)
-
-message=input()
-
-client.sendall(message.encode())
-
-else:
-
-break
-
-client.close()
+Output:
 
 
-7.import-------------------------------
 
-java.util.*; public
 
-class leaky
+
+
+
+
+2)------------
+Program:
+
+#include<stdio.h>
+
+int main()
 
 {
 
-static int min(int x,int y)
+int c1,c2,c3,temp;
+
+int locks,stocks,barrels,totallocks,totalstocks,totalbarrels;
+
+float lockprice,stockprice,barrelprice,locksales,stocksales,barrelsales,sales,com; lockprice=45.0; stockprice=30.0;
+
+barrelprice=25.0; totallocks=0; totalstocks=0; totalbarrels=0;
+
+printf("Enterthe number oflocks and to exit press-1\n"); scanf("%d",&locks);
+
+while(locks != -1)
 
 {
 
-if(x<y)
+c1=(locks<=0 || locks>70);
 
-return x;
+printf("\nEnterthe number ofstocks and barrels\n"); scanf("%d %d",&stocks,&barrels);
+
+c2=(stocks<=0 || stocks>80); c3=(barrels<=0 || barrels>90); if(c1)
+
+printf("\nValue oflocks are not in the range of 1.	70\n");
 
 else
 
-return y;
+{
+
+temp=totallocks+locks; if(temp>70) printf("Newtotallocks=%dnotintherangeof1.	70\n",temp);
+
+else totallocks=temp;
 
 }
+printf("Total locks = %d",totallocks); if(c2)
 
-public static void main(String[] args)
+printf("\n Value ofstocks not in the range of 1.	80\n");
 
-{ int drop=0,mini,nsec,cap,count=0,i,process;
-
-int inp[]=new int[25];
-
-Scanner sc=new Scanner(System.in);
-
-System.out.println("Enter The Bucket
-
-Size\n");cap= sc.nextInt();
-
-System.out.println("Enter The Operation
-
-Rate\n");process= sc.nextInt();
-
-System.out.println("Enter The No. Of Seconds You Want To
-
-Stimulate\n");nsec=sc.nextInt();
-
-for(i=0;i<nsec;i++)
-
-{ System.out.print("Enter The Size Of The Packet Entering At "+ i+1 +
-
-"sec");inp[i] = sc.nextInt();
-
-}
-
-System.out.println("\nSecond | Packet Recieved | Packet Sent | Packet Left |Packet Dropped|\n");
-
-System.out.println(" \n");
-
-for(i=0;i<nsec;i++)
+else
 
 {
 
-count+=inp[i];
+temp=totalstocks+stocks;
 
-if(count>cap)
+if(temp>80)
 
-{ drop=count-
+printf("\nNewtotalstocks =%d not in the range of 1	80",temp);
 
-cap;count=cap:
-}
-
-System.out.print(i+1);
-
-System.out.print("\t\t"+inp[i]
-
-); mini=min(count,process);
-
-System.out.print("\t\t"+mini);
-
-count=count-mini;
-
-System.out.print("\t\t"+count)
-
-;
-
-System.out.print("\t\t"+drop);
-
-drop=0;
-
-System.out.println();
+else totalstocks=temp;
 
 }
 
-for(;count!=0;i++)
+printf("\nTotal stocks = %d",totalstocks); if(c3)
+
+printf("\n Value of barrels not in the range of 1.	90\n");
+
+else
 
 {
 
-if(count>cap)
+temp=totalbarrels+barrels; if(temp>90)
 
+printf("\nNewtotal barrels=%dnotin the range of 1	90\n",temp);
+
+else totalbarrels=temp;
+
+}
+
+printf("\nTotal barrels=%d", totalbarrels);
+
+printf("\nEnterthe number of locks and to exit press-1\n"); scanf("%d",&locks);
+
+}
+printf("\n Total locks = %d",totallocks); printf("\nTotal stocks = %d",totalstocks); printf("\n Total barrels = %d",totalbarrels);
+
+locksales=totallocks*lockprice;
+
+stocksales=totalstocks*stockprice; barrelsales=totalbarrels*barrelprice; sales=locksales+stocksales+barrelsales; printf("\nTotal sales = %f",sales); if(sales>1800)
+
+{ com=0.10*1000;
+
+com=com+(0.15*800); com=com+0.20*(sales-1800);
+
+}
+
+else if(sales>1000)
+
+{ com=0.10*1000;
+
+com=com+0.15*(sales-1000);
+
+}
+
+else com=0.10*sales;
+
+printf("\nCommission = %f",com); return 0;
+
+}
+
+Output:
+
+
+
+
+
+
+
+
+
+
+
+
+3)--------+++++++------
+
+EXNO: 3. Design, Develop, code and run the program in any suitable language to       implement the Next Date function. Analyze it from the perspective of Equivalence Class Testing, derive different testcases, execute these testcases and discuss the results.
+DATE:
+
+
+AIM:
+
+Program:
+
+#include<stdio.h>
+int check(int day,int month)
 {
-
-drop=count-cap;
-
-count=cap;
-
+if((month==4||month==6||month==9 ||month==11) && day==31) return 1;
+else
+return 0;
 }
 
-System.out.print(i+1);
-
-System.out.print("\t\t0")
-
-;
-
-mini=min(count,process
-
-);
-
-System.out.print("\t\t"+
-
-mini); count=count-
-
-mini;
-
-System.out.print("\t\t"+
-
-count);
-
-System.out.print("\t\t"+
-
-drop);
-
-System.out.println();
-
-}
-
-}
-
-}
-
-
-
-9.def bfe(c,intermediate_node,neighbor,no_node):------++-----------
-
-flag=0
-
-for i in neighbor:
-
-for j in range(no_node):
-
-if((c[i][intermediate_node]+c[intermediate_node][j])<
-
-c[i][j]):
-
-#Using Bellman Ford Equation
-
-c[i][j]=c[i][intermediate_node]+c[intermediate_node][j]
-
-flag=1
-
-#c[i][i]=0
-
-if(flag==1)
-
-bfe(c,i,neighbor_set[i],no_node)
-
-if(flag==0 and intermediate_node<no_node-1
-):
-intermediate_node+=1
-bfe(c,intermediate_node,neighbor_set[intermediate_node],no_node)
-
-return
-
-no_node=int(input("Enter the number of nodes:"))
-
-c=[[0 for j in range(no_node)] for i in
-
-range(no_node)]for i in range(no_node):
-
-print("Enter initial cost for node ",i,":
-
-")for j in range(no_node):
-
-c[i][j]=int(input())
-
-print("Initial cost matrix
-
-:\n")for i in
-
-range(no_node):
-
-for j in range(no_node):
-
-print(c[i][j],end=" ")
-
-print("\n")
-
-neighbor_set=[[] for i in
-
-range(no_node)]for i in range(no_node):
-
-for j in range(no_node):
-
-if(i!=j): #always reachable from its own
-
-nodeif(c[i][j]!=1000):
-
-neighbor_set[i].append(j)
-
-print("Neighbors : \n",neighbor_set,"\n")
-
-bfe(c,0,neighbor_set[0],no_node) #initial
-
-callprint("final cost matrix :\n")
-
-for i in range(no_node):
-
-for j in range(no_node):
-
-print(c[i][j],end="
-
-")print("\n")
-
-#no_node-number of nodes
-
-#c-cost matrix
-
-#nodeb-nodeeighbors
-
-#1000 considered as infinity
-
-
-pradeep )-------------
-public class FileServer 
-
-{ 
-
- public static void main(String[] args) throws Exception 
-
+int isleap(int year)
 {
-
- //Initialize Sockets
-
- ServerSocket ssock = new ServerSocket(5000);
-
- Socket socket = ssock.accept();
-
- //The InetAddress specification
-
- InetAddress IA = InetAddress.getByName("localhost"); 
-
- 
-
- //Specify the file
-
- File file = new File("e:\\Bookmarks.html");
-
- FileInputStream fis = new FileInputStream(file);
-
- BufferedInputStream bis = new BufferedInputStream(fis); 
-
- //Get socket's output stream
-
- OutputStream os = socket.getOutputStream();
-
- //Read File Contents into contents array 
-
- byte[] contents;
-
- long fileLength = file.length(); 
-
- long current = 0;
-
- long start = System.nanoTime();
-
- while(current!=fileLength){ 
-
- int size = 10000;
-
- if(fileLength - current >= size)
-
- current += size; 
-
- else{ 
-
- size = (int)(fileLength - current); 
-
- current = fileLength;
-
- } 
-
- contents = new byte[size]; 
-
- bis.read(contents, 0, size); 
-
- os.write(contents);
-
- System.out.print("Sending file ... "+(current*100)/fileLength+"% complete!");
-
- } 
-
- os.flush(); 
-
- //File transfer done. Close the socket connection!
-
- socket.close();
-
- ssock.close();
-
- System.out.println("File sent succesfully!");
-
- } }
-
- public class FileServer ---------------------
-
-{ 
-
- public static void main(String[] args) throws Exception 
-
+if((year%4==0 && year%100!=0) || year%400==0) return 1; else
+return 0;
+}
+int main()
 {
+int day,month,year,tomm_day,tomm_month,tomm_year; char flag; do
+{
+flag='y';
+printf("\nenter the today's date in the form of dd mm yyyy\n"); scanf("%d%d%d",&day,&month,&year); tomm_month=month; tomm_year= year; if(day<1 || day>31)
+{
+printf("value of day, not in the range 1...31\n"); flag='n';
+}
+if(month<1 || month>12)
+{
+printf("value of month, not in the range 1.	12\n"); flag='n';
+}
+else if(check(day,month))
+{
+printf("value of day, not in the range day<=30"); flag='n';
+}
 
- //Initialize Sockets
+if(year<=1812 || year>2015)
+{
+printf("value of year, not in the range 1812. 2015\n"); flag='n';
+}
+if(month==2)
+{
+if(isleap(year) && day>29)
+{
+printf("invalid date input for leap year"); flag='n';
+}
+else if(!(isleap(year))&& day>28)
+{
+printf("invalid date input for not a leap year"); flag='n';
+}
+}
+}while(flag=='n');
+{
+case 1:
+case 3:
+case 5:
+case 7:
+case 8:
 
- ServerSocket ssock = new ServerSocket(5000);
+case 10:if(day<31) tomm_day=day+1;
 
- Socket socket = ssock.accept();
+else
+{
+tomm_day=1; tomm_month=month+1;
+}
+break; case 4:
+case 6:
+case 9:
+case 11: if(day<30) tomm_day=day+1; else
+{
+tomm_day=1; tomm_month=month+1;
+}
+break;
+case 12: if(day<31) tomm_day=day+1; else
+{
+tomm_day=1; tomm_month=1; if(year==2015)
+{
+printf("the next day is out of boundary value of year\n"); tomm_year=year+1;
+}
+else tomm_year=year+1;
+}
+break; case 2:
+if(day<28) tomm_day=day+1;
+else if(isleap(year)&& day==28) tomm_day=day+1; else if(day==28 || day==29)
+{
+tomm_day=1; tomm_month=3;
+}
+break;
+}
+printf("next day is : %d %d %d",tomm_day,tomm_month,tomm_year); return 0;
+}
 
- //The InetAddress specification
-
- InetAddress IA = InetAddress.getByName("localhost"); 
-
- 
-
- //Specify the file
-
- File file = new File("e:\\Bookmarks.html");
-
- FileInputStream fis = new FileInputStream(file);
-
- BufferedInputStream bis = new BufferedInputStream(fis); 
-
- //Get socket's output stream
-
- OutputStream os = socket.getOutputStream();
-
- //Read File Contents into contents array 
-
- byte[] contents;
-
- long fileLength = file.length(); 
-
- long current = 0;
-
- long start = System.nanoTime();
-
- while(current!=fileLength){ 
-
- int size = 10000;
-
- if(fileLength - current >= size)
-
- current += size; 
-
- else{ 
-
- size = (int)(fileLength - current); 
-
- current = fileLength;
-
- } 
-
- contents = new byte[size]; 
-
- bis.read(contents, 0, size); 
-
- os.write(contents);
-
- System.out.print("Sending file ... "+(current*100)/fileLength+"% complete!");
-
- } 
-
- os.flush(); 
-
- //File transfer done. Close the socket connection!
-
- socket.close();
-
- ssock.close();
-
- System.out.println("File sent succesfully!");
-
- } }
+Output:
