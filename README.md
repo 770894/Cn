@@ -8,7 +8,6 @@ c1=((a>=1)) and ((a<=10))
 c2=((b>=1)) and ((b<=10))
 
 c3=((c>=1)) and ((c<=10))
-
 if(not c1):
 
 print("a is not in range") if(not c2):
