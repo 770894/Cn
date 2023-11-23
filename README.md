@@ -1,255 +1,401 @@
-# STA
-check=True while check:
+#CD
 
-a,b,c=map(int,input().split())
-
-c1=((a>=1)) and ((a<=10))
-
-c2=((b>=1)) and ((b<=10))
-
-c3=((c>=1)) and ((c<=10))
-if(not c1):
-
-print("a is not in range") if(not c2):
-
-print("b is not in range") if(not c3):
-
-print("c is not in range") check=(not c1) or (not c2) or (not c3)
-
-if((a<(b+c)) and (b<(a+c)) and (c<(a+b))): if((a==b) and (b==c)):
-
-print("Eqilateral triangle") elif((a!=b) and (b!=c) and (c!=a)):
-
-print("Scalene triangle") else:
-
-print("Isosceles triangle")
-
-else:
-
-print("Triangle cannot be formed")
-
-Output:
+1))  IMPLEMENTATION OF LEXICAL ANALYZER USING C
 
 
-
-
-
-
-
-
-2)------------
-Program:
-
-#include<stdio.h>
-
-int main()
-
-{
-
-int c1,c2,c3,temp;
-
-int locks,stocks,barrels,totallocks,totalstocks,totalbarrels;
-
-float lockprice,stockprice,barrelprice,locksales,stocksales,barrelsales,sales,com; lockprice=45.0; stockprice=30.0;
-
-barrelprice=25.0; totallocks=0; totalstocks=0; totalbarrels=0;
-
-printf("Enterthe number oflocks and to exit press-1\n"); scanf("%d",&locks);
-
-while(locks != -1)
-
-{
-
-c1=(locks<=0 || locks>70);
-
-printf("\nEnterthe number ofstocks and barrels\n"); scanf("%d %d",&stocks,&barrels);
-
-c2=(stocks<=0 || stocks>80); c3=(barrels<=0 || barrels>90); if(c1)
-
-printf("\nValue oflocks are not in the range of 1.	70\n");
-
-else
-
-{
-
-temp=totallocks+locks; if(temp>70) printf("Newtotallocks=%dnotintherangeof1.	70\n",temp);
-
-else totallocks=temp;
-
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+enum TokenType {
+    KEYWORD,
+    IDENTIFIER,
+    INTEGER,
+    OPERATOR,
+    DELIMITER,
+    INVALID
+};
+enum TokenType classifyToken(char token[]) {
+    if (strcmp(token, "if") == 0 || strcmp(token, "else") == 0) {
+        return KEYWORD;
+    } else if (isdigit(token[0])) {
+        return INTEGER;
+    } else if (isalpha(token[0]) || token[0] == '_') {
+        return IDENTIFIER;
+    } else if (token[0] == '+' || token[0] == '-') {
+        return OPERATOR;
+    } else if (token[0] == ';' || token[0] == ',') {
+        return DELIMITER;
+    } else {
+        return INVALID;
+    }
 }
-printf("Total locks = %d",totallocks); if(c2)
+void tokenize(char input[]) {
+    char token[100];
+    int i, j = 0;
 
-printf("\n Value ofstocks not in the range of 1.	80\n");
-
-else
-
-{
-
-temp=totalstocks+stocks;
-
-if(temp>80)
-
-printf("\nNewtotalstocks =%d not in the range of 1	80",temp);
-
-else totalstocks=temp;
-
+    for (i = 0; i <= strlen(input); i++) {
+        if (input[i] == ' ' || input[i] == '\0') {
+            // Check the type of token and process accordingly
+            token[j] = '\0';
+            enum TokenType type = classifyToken(token);
+            switch (type) {
+                case KEYWORD:
+                    printf("Keyword: %s\n", token);
+                    break;
+                case IDENTIFIER:
+                    printf("Identifier: %s\n", token);
+                    break;
+                case INTEGER:
+                    printf("Integer: %s\n", token);
+                    break;
+                case OPERATOR:
+                    printf("Operator: %s\n", token);
+                    break;
+                case DELIMITER:
+                    printf("Delimiter: %s\n", token);
+                    break;
+                case INVALID:
+                    printf("Invalid Token: %s\n", token);
+                    break;
+            }
+            memset(token, 0, sizeof(token));
+            j = 0;
+        } else {
+            // Build the token character by character
+            token[j++] = input[i];
+        }
+    }
 }
 
-printf("\nTotal stocks = %d",totalstocks); if(c3)
+int main() {
+    char input[100];
 
-printf("\n Value of barrels not in the range of 1.	90\n");
+    printf("Enter a C program: ");
+    fgets(input, sizeof(input), stdin);
 
-else
+    printf("\nTokens:\n");
+    tokenize(input);
 
-{
-
-temp=totalbarrels+barrels; if(temp>90)
-
-printf("\nNewtotal barrels=%dnotin the range of 1	90\n",temp);
-
-else totalbarrels=temp;
-
+    return 0;
 }
 
-printf("\nTotal barrels=%d", totalbarrels);
 
-printf("\nEnterthe number of locks and to exit press-1\n"); scanf("%d",&locks);
 
-}
-printf("\n Total locks = %d",totallocks); printf("\nTotal stocks = %d",totalstocks); printf("\n Total barrels = %d",totalbarrels);
 
-locksales=totallocks*lockprice;
+2))   IMPLEMENTATION OF SYMBOL TABLE
 
-stocksales=totalstocks*stockprice; barrelsales=totalbarrels*barrelprice; sales=locksales+stocksales+barrelsales; printf("\nTotal sales = %f",sales); if(sales>1800)
 
-{ com=0.10*1000;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-com=com+(0.15*800); com=com+0.20*(sales-1800);
+struct Symbol {
+    char name[30];
+    int address;
+};
 
-}
+struct SymbolTable {
+    struct Symbol *entries;
+    int size;
+    int capacity;
+};
 
-else if(sales>1000)
-
-{ com=0.10*1000;
-
-com=com+0.15*(sales-1000);
-
-}
-
-else com=0.10*sales;
-
-printf("\nCommission = %f",com); return 0;
-
+void initSymbolTable(struct SymbolTable *table, int capacity) {
+    table->entries = (struct Symbol *)malloc(capacity * sizeof(struct Symbol));
+    table->size = 0;
+    table->capacity = capacity;
 }
 
-Output:
-
-
-
-
-
-
-
-
-
-
-
-
-3)--------+++++++------
-
-EXNO: 3. Design, Develop, code and run the program in any suitable language to       implement the Next Date function. Analyze it from the perspective of Equivalence Class Testing, derive different testcases, execute these testcases and discuss the results.
-DATE:
-
-
-AIM:
-
-Program:
-
-#include<stdio.h>
-int check(int day,int month)
-{
-if((month==4||month==6||month==9 ||month==11) && day==31) return 1;
-else
-return 0;
+void addSymbol(struct SymbolTable *table, const char *name, int address) {
+    if (table->size < table->capacity) {
+        struct Symbol *entry = &table->entries[table->size++];
+        strcpy(entry->name, name);
+        entry->address = address;
+    } else {
+        printf("Symbol table is full. Unable to add symbol %s.\n", name);
+    }
 }
 
-int isleap(int year)
-{
-if((year%4==0 && year%100!=0) || year%400==0) return 1; else
-return 0;
-}
-int main()
-{
-int day,month,year,tomm_day,tomm_month,tomm_year; char flag; do
-{
-flag='y';
-printf("\nenter the today's date in the form of dd mm yyyy\n"); scanf("%d%d%d",&day,&month,&year); tomm_month=month; tomm_year= year; if(day<1 || day>31)
-{
-printf("value of day, not in the range 1...31\n"); flag='n';
-}
-if(month<1 || month>12)
-{
-printf("value of month, not in the range 1.	12\n"); flag='n';
-}
-else if(check(day,month))
-{
-printf("value of day, not in the range day<=30"); flag='n';
+int searchSymbol(struct SymbolTable *table, const char *name) {
+    for (int i = 0; i < table->size; ++i) {
+        if (strcmp(table->entries[i].name, name) == 0) {
+            return table->entries[i].address;
+        }
+    }
+    return -1;
 }
 
-if(year<=1812 || year>2015)
-{
-printf("value of year, not in the range 1812. 2015\n"); flag='n';
-}
-if(month==2)
-{
-if(isleap(year) && day>29)
-{
-printf("invalid date input for leap year"); flag='n';
-}
-else if(!(isleap(year))&& day>28)
-{
-printf("invalid date input for not a leap year"); flag='n';
-}
-}
-}while(flag=='n');
-{
-case 1:
-case 3:
-case 5:
-case 7:
-case 8:
-
-case 10:if(day<31) tomm_day=day+1;
-
-else
-{
-tomm_day=1; tomm_month=month+1;
-}
-break; case 4:
-case 6:
-case 9:
-case 11: if(day<30) tomm_day=day+1; else
-{
-tomm_day=1; tomm_month=month+1;
-}
-break;
-case 12: if(day<31) tomm_day=day+1; else
-{
-tomm_day=1; tomm_month=1; if(year==2015)
-{
-printf("the next day is out of boundary value of year\n"); tomm_year=year+1;
-}
-else tomm_year=year+1;
-}
-break; case 2:
-if(day<28) tomm_day=day+1;
-else if(isleap(year)&& day==28) tomm_day=day+1; else if(day==28 || day==29)
-{
-tomm_day=1; tomm_month=3;
-}
-break;
-}
-printf("next day is : %d %d %d",tomm_day,tomm_month,tomm_year); return 0;
+void displaySymbolTable(struct SymbolTable *table) {
+    printf("\nSymbol Table:\nName\tAddress\n");
+    for (int i = 0; i < table->size; ++i) {
+        printf("%s\t%d\n", table->entries[i].name, table->entries[i].address);
+    }
 }
 
-Output:
+void freeSymbolTable(struct SymbolTable *table) {
+    free(table->entries);
+    table->size = 0;
+    table->capacity = 0;
+}
+
+int main() {
+    struct SymbolTable symbolTable;
+    initSymbolTable(&symbolTable, 10);
+
+    addSymbol(&symbolTable, "variable1", 1000);
+    addSymbol(&symbolTable, "variable2", 2000);
+
+    int address = searchSymbol(&symbolTable, "variable1");
+    if (address != -1) {
+        printf("Address of variable1: %d\n", address);
+    } else {
+        printf("Symbol not found.\n");
+    }
+
+    displaySymbolTable(&symbolTable);
+    freeSymbolTable(&symbolTable);
+
+    return 0;
+}
+
+
+
+3))Program to recognize a valid control structures syntax of C language (For loop, while loop, if-else, if-else-if, switch-case, etc.)
+
+LEX
+%{
+#include "y.tab.h"
+%}
+
+%%
+
+"for"                   { return FOR; }
+"while"                 { return WHILE; }
+"if"                    { return IF; }
+"else"                  { return ELSE; }
+"switch"                { return SWITCH; }
+"case"                  { return CASE; }
+"break"                 { return BREAK; }
+"int|char|float|double" { return TYPE; }
+[ \t\n]                 ; // Skip whitespace
+.                       { return *yytext; }
+
+%%
+
+int yywrap() {
+    return 1;
+}
+
+YACC
+
+%{
+#include <stdio.h>
+%}
+
+%token FOR WHILE IF ELSE SWITCH CASE BREAK TYPE
+
+%%
+
+program: /* empty */
+    | program statement
+    ;
+
+statement:
+    for_loop
+    | while_loop
+    | if_statement
+    | switch_statement
+    | BREAK ';'
+    ;
+
+for_loop:
+    FOR '(' expression ';' expression ';' expression ')' statement
+    ;
+
+while_loop:
+    WHILE '(' expression ')' statement
+    ;
+
+if_statement:
+    IF '(' expression ')' statement
+    | IF '(' expression ')' statement ELSE statement
+    ;
+
+switch_statement:
+    SWITCH '(' expression ')' '{' case_list '}'
+    ;
+
+case_list:
+    /* empty */
+    | case_list CASE constant ':' statement
+    ;
+
+expression:
+    /* Define your expression rules here */
+    ;
+
+constant:
+    /* Define your constant rules here */
+    ;
+
+%%
+
+int main() {
+    yyparse();
+    return 0;
+}
+
+
+
+
+
+4)THREE ADDRESS CODE GENERATION USING LEX AND YACC
+
+#LEX
+%{
+#include "y.tab.h"
+%}
+
+%%
+
+[0-9]+                  { yylval.num = atoi(yytext); return NUM; }
+[-+*/()]                { return *yytext; }
+[a-zA-Z][a-zA-Z0-9_]*    { yylval.id = strdup(yytext); return ID; }
+[ \t\n]                 ; 
+.                       { yyerror("Invalid character"); }
+
+%%
+
+int yywrap() {
+    return 1;
+}
+
+
+
+#YACC
+
+%{
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct TAC {
+    char op;
+    char arg1[30];
+    char arg2[30];
+    char result[30];
+};
+
+struct TAC tac[100];
+int tacIndex = 0;
+
+%}
+
+%token NUM ID
+
+%%
+
+program: /* empty */
+    | program statement
+    ;
+
+statement:
+    expression ';' { printf("%s = %s %c %s\n", $$.result, $1.result, $2, $3.result); }
+    ;
+
+expression:
+    ID              { $$ = $1; }
+    | NUM           { $$ = $1; }
+    | expression '+' expression   { $$ = createTemp(); generateTAC('+', $1, $3, $$); }
+    | expression '-' expression   { $$ = createTemp(); generateTAC('-', $1, $3, $$); }
+    | expression '*' expression   { $$ = createTemp(); generateTAC('*', $1, $3, $$); }
+    | expression '/' expression   { $$ = createTemp(); generateTAC('/', $1, $3, $$); }
+    | '(' expression ')'          { $$ = $2; }
+    ;
+
+%%
+
+char* createTemp() {
+    char temp[30];
+    sprintf(temp, "t%d", tacIndex++);
+    return strdup(temp);
+}
+
+void generateTAC(char op, char* arg1, char* arg2, char* result) {
+    tac[tacIndex].op = op;
+    strcpy(tac[tacIndex].arg1, arg1);
+    strcpy(tac[tacIndex].arg2, arg2);
+    strcpy(tac[tacIndex].result, result);
+    tacIndex++;
+}
+
+int main() {
+    yyparse();
+    return 0;
+}
+
+#5))
+IMPLEMENTATION OF TYPE CHECKING
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Enum for data types
+typedef enum {
+    INT_TYPE,
+    FLOAT_TYPE,
+    CHAR_TYPE,
+    ERROR_TYPE
+} DataType;
+
+// Structure for symbol table entry
+typedef struct {
+    char name[30];
+    DataType type;
+} SymbolEntry;
+
+// Symbol table (for simplicity, a fixed-size array is used)
+SymbolEntry symbolTable[100];
+int symbolIndex = 0;
+
+// Function to add a symbol to the symbol table
+void addSymbol(const char *name, DataType type) {
+    SymbolEntry entry;
+    strcpy(entry.name, name);
+    entry.type = type;
+    symbolTable[symbolIndex++] = entry;
+}
+
+// Function to perform type checking on an assignment
+DataType typeCheckAssignment(const char *variable, DataType exprType) {
+    for (int i = 0; i < symbolIndex; ++i) {
+        if (strcmp(symbolTable[i].name, variable) == 0) {
+            if (symbolTable[i].type == exprType) {
+                printf("Assignment is type-correct.\n");
+                return symbolTable[i].type;
+            } else {
+                printf("Error: Type mismatch in assignment.\n");
+                return ERROR_TYPE;
+            }
+        }
+    }
+
+    printf("Error: Variable '%s' not declared.\n", variable);
+    return ERROR_TYPE;
+}
+
+int main() {
+    // Add symbols to the symbol table (for demonstration purposes)
+    addSymbol("x", INT_TYPE);
+    addSymbol("y", FLOAT_TYPE);
+
+    // Example of type checking in an assignment
+    DataType exprType = FLOAT_TYPE; // Assume the expression type is known
+    DataType assignmentResult = typeCheckAssignment("x", exprType);
+
+    // You can use the result for further processing or error handling
+
+    return 0;
+}
+
