@@ -76,7 +76,7 @@ int main() {
     tokenize(input);
 
     return 0;
-}
+}'''
 
 
 
