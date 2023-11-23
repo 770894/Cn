@@ -2,7 +2,6 @@
 
 1))  IMPLEMENTATION OF LEXICAL ANALYZER USING C
 
-
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
