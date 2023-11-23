@@ -83,9 +83,9 @@ int main() {
 
 
 
-2))   IMPLEMENTATION OF SYMBOL TABLE
+#2))   IMPLEMENTATION OF SYMBOL TABLE
 
-
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -158,11 +158,11 @@ int main() {
 
     return 0;
 }
+```
 
 
-
-3))Program to recognize a valid control structures syntax of C language (For loop, while loop, if-else, if-else-if, switch-case, etc.)
-
+#3))Program to recognize a valid control structures syntax of C language (For loop, while loop, if-else, if-else-if, switch-case, etc.)
+```c
 LEX
 %{
 #include "y.tab.h"
@@ -245,13 +245,13 @@ int main() {
     yyparse();
     return 0;
 }
+```
 
 
 
 
-
-4)THREE ADDRESS CODE GENERATION USING LEX AND YACC
-
+#4)THREE ADDRESS CODE GENERATION USING LEX AND YACC
+```c
 #LEX
 %{
 #include "y.tab.h"
@@ -321,7 +321,7 @@ char* createTemp() {
     sprintf(temp, "t%d", tacIndex++);
     return strdup(temp);
 }
-
+```
 #CD
 
 1))  IMPLEMENTATION OF LEXICAL ANALYZER USING C
@@ -401,13 +401,13 @@ int main() {
 
     return 0;
 }
+```
 
 
 
+#2))   IMPLEMENTATION OF SYMBOL TABLE
 
-2))   IMPLEMENTATION OF SYMBOL TABLE
-
-
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -480,11 +480,11 @@ int main() {
 
     return 0;
 }
+```
 
 
-
-3))Program to recognize a valid control structures syntax of C language (For loop, while loop, if-else, if-else-if, switch-case, etc.)
-
+#3))Program to recognize a valid control structures syntax of C language (For loop, while loop, if-else, if-else-if, switch-case, etc.)
+```c
 LEX
 %{
 #include "y.tab.h"
@@ -568,12 +568,12 @@ int main() {
     return 0;
 }
 
+```
 
 
 
-
-4)THREE ADDRESS CODE GENERATION USING LEX AND YACC
-
+#4)THREE ADDRESS CODE GENERATION USING LEX AND YACC
+```c
 #LEX
 %{
 #include "y.tab.h"
@@ -657,120 +657,4 @@ int main() {
     return 0;
 }
 
-#5))
-IMPLEMENTATION OF TYPE CHECKING
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-// Enum for data types
-typedef enum {
-    INT_TYPE,
-    FLOAT_TYPE,
-    CHAR_TYPE,
-    ERROR_TYPE
-} DataType;
-
-// Structure for symbol table entry
-typedef struct {
-    char name[30];
-    DataType type;
-} SymbolEntry;
-
-// Symbol table (for simplicity, a fixed-size array is used)
-SymbolEntry symbolTable[100];
-int symbolIndex = 0;
-
-// Function to add a symbol to the symbol table
-void addSymbol(const char *name, DataType type) {
-    SymbolEntry entry;
-    strcpy(entry.name, name);
-    entry.type = type;
-    symbolTable[symbolIndex++] = entry;
-}
-
-// Function to perform type checking on an assignment
-DataType typeCheckAssignment(const char *variable, DataType exprType) {
-    for (int i = 0; i < symbolIndex; ++i) {
-        if (strcmp(symbolTable[i].name, variable) == 0) {
-            if (symbolTable[i].type == exprType) {
-                printf("Assignment is type-correct.\n");
-                return symbolTable[i].type;
-            } else {
-                printf("Error: Type mismatch in assignment.\n");
-                return ERROR_TYPE;
-            }
-        }
-    }
-
-    printf("Error: Variable '%s' not declared.\n", variable);
-    return ERROR_TYPE;
-}
-
-int main() {
-    // Add symbols to the symbol table (for demonstration purposes)
-    addSymbol("x", INT_TYPE);
-    addSymbol("y", FLOAT_TYPE);
-
-    // Example of type checking in an assignment
-    DataType exprType = FLOAT_TYPE; // Assume the expression type is known
-    DataType assignmentResult = typeCheckAssignment("x", exprType);
-
-    // You can use the result for further processing or error handling
-
-    return 0;
-}
-
-￼Entervoid generateTAC(char op, char* arg1, char* arg2, char* result) {
-    tac[tacIndex].op = op;
-    strcpy(tac[tacIndex].arg1, arg1);
-    strcpy(tac[tacIndex].arg2, arg2);
-    strcpy(tac[tacIndex].result, result);
-    tacIndex++;
-}
-
-int main() {
-    yyparse();
-    return 0;
-}
-
-#5))
-IMPLEMENTATION OF TYPE CHECKING
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-// Enum for data types
-typedef enum {
-    INT_TYPE,
-    FLOAT_TYPE,
-    CHAR_TYPE,
-    ERROR_TYPE
-Type;
-
-// Structure for symbol table entry
-typedef struct {
-    char name[30];
-    DataType type;
-} SymbolEntry;
-
-// Symbol table (for simplicity, a fixed-size array is used)
-SymbolEntry symbolTable[100];
-int symbolIndex = 0;
-
-// Function to add a symbol to the symbol table
-void addSymbol(const char *name, DataType type) {
-    SymbolEntry entry;
-    strcpy(entry.name, name);
-    entry.type = type;
-    symbolTable[symbolIndex++] = entry;
-}
-
-// Function to perform type checking on an assignment
-DataType typeCheckAssignment(const char *variable, DataType exprType) {
-    for (int i = 0; i < symbolIndex; ++i) {
-        if (strcmp(symbolTable[i].name, variable) == 0) {
-            if (symbolTable[i].type == exprType) {
-                printf("Assignment is type-correct.\n");
+```
