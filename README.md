@@ -1,8 +1,9 @@
 #CD
 
-1))  IMPLEMENTATION OF LEXICAL ANALYZER USING C
+#1))  IMPLEMENTATION OF LEXICAL ANALYZER USING C
 
-```#include <stdio.h>
+```c
+#include <stdio.h>
 #include <ctype.h>
 #include <string.h>
 enum TokenType {
@@ -76,7 +77,8 @@ int main() {
     tokenize(input);
 
     return 0;
-}```
+}
+```
 
 
 
